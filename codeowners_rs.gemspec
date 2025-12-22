@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "A Ruby CODEOWNERS parser powered by Rust"
   spec.homepage = "https://github.com/wrapbook/codeowners_rs"
-  spec.license = nil # TODO: Pick a license if we open source this
+  spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
   spec.required_rubygems_version = ">= 3.3.11"
 
