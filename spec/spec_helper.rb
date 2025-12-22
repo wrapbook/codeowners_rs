@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "debug"
+
 require "codeowners_rs"
 
 RSpec.configure do |config|
@@ -11,5 +13,11 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+end
+
+RSpec::Matchers.define :match_path do |path|
+  match do |rule|
+    rule.match?(path)
   end
 end

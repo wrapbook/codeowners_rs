@@ -2,12 +2,12 @@
 name = "codeowners_rs"
 version = "0.1.0"
 edition = "2021"
-authors = ["Reid Lynch <reid.lynch@gmail.com>"]
-license = "MIT"
 publish = false
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
+lazy_static = { version = "1.5.0" }
 magnus = { version = "0.8.2" }
+regex = { version = "1.12.2" }

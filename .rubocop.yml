@@ -1,6 +1,9 @@
 AllCops:
   TargetRubyVersion: 3.2
 
+Metrics/BlockLength:
+  ExcludedMethods: ["describe", "context"]
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
