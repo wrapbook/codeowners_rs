@@ -5,6 +5,7 @@ require_relative "codeowners_rs/rule"
 require_relative "codeowners_rs/ruleset"
 require "codeowners_rs/codeowners_rs"
 
+# Top-level module for the CodeownersRs gem
 module CodeownersRs
   class Error < StandardError; end
 
