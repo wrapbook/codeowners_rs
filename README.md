@@ -26,3 +26,11 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/wrapbo
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Disclaimer
+
+This project is provided as open source under the MIT License and is made available on an **"as is"** basis, without warranty of any kind, express or implied.
+
+This repository is **not an official Wrapbook product**. Wrapbook makes no commitments regarding ongoing development, maintenance, bug fixes, security updates, or compatibility.
+
+Use of this project is at your own risk.
