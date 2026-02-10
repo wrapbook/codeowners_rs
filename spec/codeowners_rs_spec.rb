@@ -16,6 +16,12 @@ RSpec.describe CodeownersRs do
 
       expect(codeowners.root).to eq(fixture_root)
     end
+
+    it "accepts a Pathname" do
+      codeowners = described_class.load(Pathname.new(fixture_path), root: fixture_root)
+
+      expect(codeowners).to be_a(described_class::Ruleset)
+    end
   end
 
   describe ".build" do
