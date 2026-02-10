@@ -1,5 +1,7 @@
 # CodeownersRs
 
+[![Ruby](https://github.com/wrapbook/codeowners_rs/actions/workflows/main.yml/badge.svg)](https://github.com/wrapbook/codeowners_rs/actions/workflows/main.yml?event=push)
+
 ## Installation
 
 ```ruby
