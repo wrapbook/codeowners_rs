@@ -2,8 +2,15 @@ AllCops:
   TargetRubyVersion: 3.3
   NewCops: enable
 
+plugins:
+  - rubocop-rake
+  - rubocop-rspec
+
 Metrics/BlockLength:
   AllowedMethods: ["describe", "context"]
+
+RSpec/MultipleExpectations:
+  Max: 4
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
