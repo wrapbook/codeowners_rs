@@ -6,9 +6,15 @@ RSpec.describe CodeownersRs do
 
   describe ".load" do
     it "returns a Ruleset" do
-      codeowners = described_class.load(path: fixture_path, root: fixture_root)
+      codeowners = described_class.load(fixture_path, root: fixture_root)
 
       expect(codeowners).to be_a(described_class::Ruleset)
+    end
+
+    it "infers root from path when root is not provided" do
+      codeowners = described_class.load(fixture_path)
+
+      expect(codeowners.root).to eq(fixture_root)
     end
   end
 

@@ -15,7 +15,7 @@ module CodeownersRs
     # @param path [String] Path to the CODEOWNERS file
     # @param root [String] Root directory for the CODEOWNERS rules
     # @return [Codeowners::Ruleset] Parsed CODEOWNERS Ruleset
-    def load(path:, root:)
+    def load(path, root: nil)
       Ruleset.load(path, root)
     end
 

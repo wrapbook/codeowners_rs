@@ -19,5 +19,9 @@ module CodeownersRs
     rescue NameError
       []
     end
+
+    def inspect
+      "#<#{self.class} path=#{path.inspect} root=#{root.inspect}>"
+    end
   end
 end

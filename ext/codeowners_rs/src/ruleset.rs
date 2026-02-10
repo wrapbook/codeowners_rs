@@ -11,7 +11,7 @@ pub struct Ruleset {
 }
 
 impl Ruleset {
-    pub fn load(ruby: &Ruby, path: String, root: String) -> Result<Self, Error> {
+    pub fn load(ruby: &Ruby, path: String, root: Option<String>) -> Result<Self, Error> {
         let content = fs::read_to_string(&path).map_err(|e| {
             Error::new(
                 Ruby::exception_runtime_error(ruby),
@@ -19,7 +19,11 @@ impl Ruleset {
             )
         })?;
 
-        Ok(Self::build(content, root, Some(path)))
+        Ok(Self::build(
+            content,
+            root.unwrap_or_else(|| Self::inferred_root_from_path(&path)),
+            Some(path),
+        ))
     }
 
     pub fn build(content: String, root: String, path: Option<String>) -> Self {
@@ -72,5 +76,16 @@ impl Ruleset {
 
     pub fn rules(&self) -> Vec<Rule> {
         self.rules.clone()
+    }
+
+    // To use a CODEOWNERS file, create a new file called CODEOWNERS in the .github/, root, or docs/ directory of the repository
+    fn inferred_root_from_path(path: &str) -> String {
+        if path.ends_with("/.github/CODEOWNERS") {
+            path.trim_end_matches("/.github/CODEOWNERS").to_string()
+        } else if path.ends_with("/docs/CODEOWNERS") {
+            path.trim_end_matches("/docs/CODEOWNERS").to_string()
+        } else {
+            path.trim_end_matches("/CODEOWNERS").to_string()
+        }
     }
 }
