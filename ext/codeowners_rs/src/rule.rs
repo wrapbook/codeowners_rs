@@ -1,7 +1,6 @@
-use lazy_static::lazy_static;
 use regex::Captures;
 use regex::Regex;
-use std::collections::HashMap;
+use std::sync::LazyLock;
 
 #[derive(Clone, Debug)]
 #[magnus::wrap(class = "CodeownersRs::Rule")]
@@ -66,19 +65,8 @@ impl Rule {
     }
 }
 
-lazy_static! {
-    static ref REPLACEMENT_REGEX: Regex = replacement_regex();
-    static ref PIECE_MAP: HashMap<&'static str, &'static str> = HashMap::from([
-        ("/**/", "[^.]*/"),
-        ("**", ".*"),
-        ("*", "[^/]*"),
-        ("/", r"\/"),
-        (".", r"\."),
-    ]);
-}
-
 // Replace CODEOWNERS pattern captures with regex equivalents
-fn replacement_regex() -> Regex {
+static REPLACEMENT_REGEX: LazyLock<Regex> = LazyLock::new(|| {
     let re_str = [
         regex::escape("/**/"),
         regex::escape("**"),
@@ -88,6 +76,17 @@ fn replacement_regex() -> Regex {
     ]
     .join("|");
     return Regex::new(&re_str).unwrap();
+});
+
+fn replace_piece(piece: &str) -> &'static str {
+    match piece {
+        "/**/" => "[^.]*/",
+        "**" => ".*",
+        "*" => "[^/]*",
+        "/" => r"\/",
+        "." => r"\.",
+        other => panic!("No regex mapping for '{}'", other),
+    }
 }
 
 fn pattern_to_regex(pattern: &str) -> Regex {
@@ -111,10 +110,7 @@ fn pattern_to_regex(pattern: &str) -> Regex {
     // Replace CODEOWNERS patterns with regex equivalents
     regex_str = REPLACEMENT_REGEX
         .replace_all(&regex_str, |caps: &Captures| {
-            match PIECE_MAP.get(&caps[0]) {
-                Some(piece) => piece,
-                None => panic!("No regex mapping for pattern piece '{}'", &caps[0]),
-            }
+            replace_piece(caps.get(0).unwrap().as_str())
         })
         .to_string();
 

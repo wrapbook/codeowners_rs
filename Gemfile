@@ -5,6 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in codeowners_rs.gemspec
 gemspec
 
+gem "benchmark"
 gem "debug"
 gem "irb"
 
