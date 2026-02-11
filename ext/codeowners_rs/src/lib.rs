@@ -26,9 +26,7 @@ fn init(ruby: &Ruby) -> Result<(), Error> {
     let class = module.define_class("Rule", ruby.class_object())?;
     class.define_singleton_method("new", function!(Rule::new, 3))?;
     class.define_singleton_method("from_line", function!(Rule::from_line, 2))?;
-    class.define_method("match?", method!(Rule::is_match, 1))?;
     class.define_method("pattern", method!(Rule::pattern, 0))?;
-    class.define_method("regex_string", method!(Rule::regex_string, 0))?;
     class.define_method("owners", method!(Rule::owners, 0))?;
     class.define_method("line_number", method!(Rule::line_number, 0))?;
 

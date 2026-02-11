@@ -103,6 +103,66 @@ RSpec.describe CodeownersRs::Ruleset do
 
       expect(rule).to be_nil
     end
+
+    describe "patterns" do
+      def ruleset(pattern)
+        described_class.build("#{pattern} @owner", "/", nil)
+      end
+
+      it "matches *" do
+        rule = ruleset("*")
+        expect(rule).to match_path("/test")
+      end
+
+      it "matches * with extension" do
+        rule = ruleset("*.js")
+        expect(rule).to match_path("test.js")
+        expect(rule).not_to match_path("test.ts")
+      end
+
+      it "matches directory starting at root" do
+        rule = ruleset("/build/logs/")
+        expect(rule).to match_path("/build/logs/test.log")
+        expect(rule).not_to match_path("/dev/build/logs/test.log")
+      end
+
+      it "matches rootless directory" do
+        rule = ruleset("docs/")
+        expect(rule).to match_path("/app/docs/setup/info.md")
+      end
+
+      it "matches directory with *" do
+        rule = ruleset("docs/*")
+        expect(rule).to match_path("docs/getting-started.md")
+        expect(rule).not_to match_path("docs/build-app/troubleshooting.md")
+      end
+
+      it "matches /**" do
+        rule = ruleset("/docs/**")
+        expect(rule).to match_path("/docs/setup/dev/getting-started.md")
+      end
+
+      it "matches /**/dir" do
+        rule = ruleset("/**/docs")
+
+        expect(rule).to match_path("/app/docs/setup/info.md")
+        expect(rule).to match_path("/src/app/docs/setup/info.md")
+      end
+
+      it "matches /**/*word*" do
+        rule = ruleset("/**/*doc*")
+
+        expect(rule).to match_path("/app/docs/setup/info.md")
+        expect(rule).to match_path("/src/app/docs/setup/info.md")
+      end
+
+      it "escapes ." do
+        rule = ruleset("file.ex")
+
+        expect(rule).to match_path("file.ex")
+        expect(rule).not_to match_path("fileaex")
+      end
+    end
   end
 
   describe "#owners_for_path" do

@@ -17,7 +17,7 @@ RSpec.configure do |config|
 end
 
 RSpec::Matchers.define :match_path do |path|
-  match do |rule|
-    rule.match?(path)
+  match do |ruleset|
+    !ruleset.rule_for_path(path).nil?
   end
 end
