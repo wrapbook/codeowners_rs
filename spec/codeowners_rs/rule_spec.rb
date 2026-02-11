@@ -77,5 +77,12 @@ RSpec.describe CodeownersRs::Rule do
       expect(rule).to match_path("file.ex")
       expect(rule).not_to match_path("fileaex")
     end
+
+    it "doesn't match ** in words to a slash" do
+      rule = rule("/docs**setup")
+
+      expect(rule).not_to match_path("/docs/setup/info.md")
+      expect(rule).to match_path("/docs-setup/info.md")
+    end
   end
 end

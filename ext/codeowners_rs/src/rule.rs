@@ -69,7 +69,8 @@ impl Rule {
 static REPLACEMENT_REGEX: LazyLock<Regex> = LazyLock::new(|| {
     let re_str = [
         regex::escape("/**/"),
-        regex::escape("**"),
+        regex::escape("/**"),
+        regex::escape("*+"),
         regex::escape("*"),
         regex::escape("/"),
         regex::escape("."),
@@ -80,8 +81,9 @@ static REPLACEMENT_REGEX: LazyLock<Regex> = LazyLock::new(|| {
 
 fn replace_piece(piece: &str) -> &'static str {
     match piece {
-        "/**/" => "[^.]*/",
-        "**" => ".*",
+        "/**/" => "/[^.]*/",
+        "/**" => "/.*",
+        "*+" => ".*",
         "*" => "[^/]*",
         "/" => r"\/",
         "." => r"\.",
