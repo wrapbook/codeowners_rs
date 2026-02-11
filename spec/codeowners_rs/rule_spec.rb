@@ -62,6 +62,7 @@ RSpec.describe CodeownersRs::Rule do
 
       expect(rule).to match_path("/app/docs/setup/info.md")
       expect(rule).to match_path("/src/app/docs/setup/info.md")
+      expect(rule).to match_path("/docs/setup/info.md")
     end
 
     it "matches /**/*word*" do

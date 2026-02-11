@@ -81,7 +81,7 @@ static REPLACEMENT_REGEX: LazyLock<Regex> = LazyLock::new(|| {
 
 fn replace_piece(piece: &str) -> &'static str {
     match piece {
-        "/**/" => "/[^.]*/",
+        "/**/" => "/?[^.]*/",
         "/**" => "/.*",
         "*+" => ".*",
         "*" => "[^/]*",
