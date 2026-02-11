@@ -1,5 +1,6 @@
 use crate::rule::Rule;
 use magnus::{Error, Ruby};
+use std::borrow::Cow;
 use std::fs;
 
 #[derive(Clone, Debug)]
@@ -45,10 +46,12 @@ impl Ruleset {
     }
 
     pub fn rule_for_path(&self, path: String) -> Option<Rule> {
-        let mut normalized_path = path.trim_start_matches(&self.root).to_string();
-        if !normalized_path.starts_with("/") {
-            normalized_path.insert_str(0, "/");
-        }
+        let trimmed_path = path.trim_start_matches(&self.root);
+        let normalized_path: Cow<str> = if trimmed_path.starts_with('/') {
+            Cow::Borrowed(trimmed_path)
+        } else {
+            Cow::Owned(format!("/{}", trimmed_path))
+        };
 
         // Search in reverse order (last matching rule wins)
         return self
