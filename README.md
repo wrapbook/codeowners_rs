@@ -19,6 +19,10 @@ codeowners.rule_for_path("app/models/user.rb")
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake compile` to compile the Rust code. Run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
+## Releasing
+
+To create a new release, push a new version tag to GitHub, like v0.1.0. The `release.yml` workflow takes care of cross compilation and pushing to RubyGems.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/wrapbook/codeowners_rs.
