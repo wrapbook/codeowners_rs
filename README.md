@@ -21,7 +21,7 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Releasing
 
-To create a new release, push a new version tag to GitHub, like v0.1.0. The `release.yml` workflow takes care of cross compilation and pushing to RubyGems.
+To create a new release, push a new version tag to GitHub. The `release.yml` workflow takes care of cross compilation and pushing to RubyGems.
 
 ## Contributing
 
