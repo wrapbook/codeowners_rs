@@ -3,7 +3,13 @@
 require_relative "codeowners_rs/version"
 require_relative "codeowners_rs/rule"
 require_relative "codeowners_rs/ruleset"
-require "codeowners_rs/codeowners_rs"
+
+begin
+  version_dir = RUBY_VERSION.match(/(\d+\.\d+)/).to_a.first # Extract major.minor version (e.g., "3.3")
+  require_relative "codeowners_rs/#{version_dir}/codeowners_rs"
+rescue LoadError
+  require_relative "codeowners_rs/codeowners_rs"
+end
 
 # Top-level module for the CodeownersRs gem
 module CodeownersRs
