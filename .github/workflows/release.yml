@@ -61,4 +61,7 @@ jobs:
           echo "---
           :rubygems_api_key: ${RUBYGEMS_API_KEY}" > ~/.gem/credentials
           chmod 0600 ~/.gem/credentials
-          gem push pkg/*.gem
+          for gem in pkg/*.gem
+          do
+            gem push $gem
+          done
