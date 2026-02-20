@@ -54,13 +54,7 @@ jobs:
           mkdir -p pkg
           find artifacts -name "*.gem" -exec mv {} pkg/ \;
       - name: Publish to RubyGems
-        env:
-          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
         run: |
-          mkdir -p ~/.gem
-          echo "---
-          :rubygems_api_key: ${RUBYGEMS_API_KEY}" > ~/.gem/credentials
-          chmod 0600 ~/.gem/credentials
           for gem in pkg/*.gem
           do
             gem push $gem
