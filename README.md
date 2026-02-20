@@ -1,6 +1,6 @@
 # CodeownersRs
 
-[![Ruby](https://github.com/wrapbook/codeowners_rs/actions/workflows/main.yml/badge.svg)](https://github.com/wrapbook/codeowners_rs/actions/workflows/main.yml?event=push)
+[![Ruby](https://github.com/wrapbook/codeowners_rs/actions/workflows/test.yml/badge.svg)](https://github.com/wrapbook/codeowners_rs/actions/workflows/test.yml?event=push)
 
 ## Installation
 
@@ -17,7 +17,7 @@ codeowners.rule_for_path("app/models/user.rb")
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake compile` to compile the Rust code. Run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 ## Contributing
 
