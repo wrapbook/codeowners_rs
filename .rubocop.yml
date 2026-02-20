@@ -6,6 +6,9 @@ plugins:
   - rubocop-rake
   - rubocop-rspec
 
+Gemspec/RequireMFA:
+  Enabled: false
+
 Metrics/BlockLength:
   AllowedMethods: ["describe", "context"]
 
