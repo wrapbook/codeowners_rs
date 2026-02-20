@@ -45,6 +45,7 @@ jobs:
   release:
     needs: cross-compile
     runs-on: ubuntu-latest
+    uses: shared-org/shared-workflows/.github/workflows/ruby-gem-release.yml@main
     steps:
       - uses: actions/download-artifact@v7
         with:
@@ -53,7 +54,6 @@ jobs:
         run: |
           mkdir -p pkg
           find artifacts -name "*.gem" -exec mv {} pkg/ \;
-      - uses: shared-org/shared-workflows/.github/workflows/ruby-gem-release.yml@main
       - name: Publish to RubyGems
         run: |
           for gem in pkg/*.gem
