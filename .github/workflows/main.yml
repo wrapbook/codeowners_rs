@@ -9,13 +9,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
-        ruby:
-          - '3.4.6'
-
+        os: [ubuntu-latest, macos-latest]
+        ruby: ["3.3", "3.4", "4.0"]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,6 +25,6 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
           cargo-cache: true
-          rubygems: '3.7.2'
+          rubygems: "3.7.2"
       - name: Run the default task
         run: bundle exec rake
