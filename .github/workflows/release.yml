@@ -45,8 +45,8 @@ jobs:
   release:
     needs: cross-compile
     runs-on: ubuntu-latest
-    uses: shared-org/shared-workflows/.github/workflows/ruby-gem-release.yml@main
     steps:
+      - uses: shared-org/shared-workflows/.github/workflows/ruby-gem-release.yml@main
       - uses: actions/download-artifact@v7
         with:
           path: artifacts
