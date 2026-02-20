@@ -53,6 +53,7 @@ jobs:
         run: |
           mkdir -p pkg
           find artifacts -name "*.gem" -exec mv {} pkg/ \;
+      - uses: shared-org/shared-workflows/.github/workflows/ruby-gem-release.yml@main
       - name: Publish to RubyGems
         run: |
           for gem in pkg/*.gem
